@@ -1,15 +1,19 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
 
-class ScanMode {
-  ScanMode({
-    required this.id,
-    required this.tipo,
+ScanModel scanModelFromJson(String str) => ScanModel.fromJson(json.decode(str));
+String scanModelToJson(ScanModel data) => json.encode(data.toJson());
+
+class ScanModel {
+  ScanModel({
+    this.id = 0,
+    this.tipo = '',
     required this.valor,
   }) {
-    if (tipo.contains('http')) {
-      tipo = 'http';
+    if (this.valor.contains('http')) {
+      this.tipo = 'http';
     } else {
-      tipo = 'geo';
+      this.tipo = 'geo';
     }
   }
 
@@ -17,7 +21,7 @@ class ScanMode {
   String tipo;
   String valor;
 
-  factory ScanMode.fromJson(Map<String, dynamic> json) => ScanMode(
+  factory ScanModel.fromJson(Map<String, dynamic> json) => ScanModel(
         id: json["id"],
         tipo: json["tipo"],
         valor: json["valor"],
@@ -29,7 +33,3 @@ class ScanMode {
         "valor": valor,
       };
 }
-
-ScanMode scanModeFromJson(String str) => ScanMode.fromJson(json.decode(str));
-
-String scanModeToJson(ScanMode data) => json.encode(data.toJson());
