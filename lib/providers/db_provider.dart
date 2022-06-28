@@ -22,20 +22,23 @@ class DBProvider {
 
   Future<Database> initDB() async {
     // Path de donde almacenaremos la base de datos
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'ScansDB.db');
-    print(path);
+
+    // Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    // final path = join(documentsDirectory.path, 'ScansDB.db');
+    final path = join(await getDatabasesPath(), 'ScansDB.db');
 
     // Crear base de datos
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute('''
-          CREATE TABLE Scans(
-            id INTEGER PRIMARY KEY,
-            tipo TEXT,
-            valor TEXT
-          )
-        ''');
+      // await db.execute('''
+      //     CREATE TABLE Scans(
+      //       id INTEGER PRIMARY KEY,
+      //       tipo TEXT,
+      //       valor TEXT
+      //     )
+      //   ''');
+      await db.execute(
+          "CREATE TABLE Scans(id INTEGER PRIMARY KEY,tipo TEXT,valor TEXT)");
     });
   }
 
@@ -51,8 +54,6 @@ class DBProvider {
       INSERT INTO Scans( id, tipo, valor )
         VALUES( $id, '$tipo', '$valor' )
     ''');
-
-    print(res);
 
     return res;
   }

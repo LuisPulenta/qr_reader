@@ -13,12 +13,14 @@ class CustomNavigationBar extends StatelessWidget {
       elevation: 0,
       onTap: (int i) => uiProvider.selectedMenuOpt = i,
       currentIndex: currentIndex.selectedMenuOpt,
-      items: [
+      backgroundColor: Colors.lightBlue[100],
+      unselectedItemColor: Colors.lightBlue,
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Mapa'),
         BottomNavigationBarItem(
             icon: Icon(Icons.compass_calibration), label: 'Direcciones'),
       ],
-      selectedItemColor: Colors.deepPurple,
+      selectedItemColor: Colors.blue[900],
     );
   }
 }

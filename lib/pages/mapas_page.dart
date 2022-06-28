@@ -11,7 +11,7 @@ class MapasPage extends StatefulWidget {
 class _MapasPageState extends State<MapasPage> {
   @override
   Widget build(BuildContext context) {
-    return ScanTiles(
+    return const ScanTiles(
       tipo: 'geo',
     );
   }
